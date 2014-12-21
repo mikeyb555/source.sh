@@ -1,0 +1,31 @@
+<div class="highlight"><pre><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+
+	<span class="n">config</span><span class="o">.</span><span class="n">site_title</span> <span class="o">=</span> <span class="s2">&quot;Reporting Portal&quot;</span>
+
+	<span class="c1">#disable comments</span>
+		<span class="n">config</span><span class="o">.</span><span class="n">allow_comments</span> <span class="o">=</span> <span class="kp">false</span>
+
+
+		<span class="c1">#increase csv limit</span>
+	<span class="k">module</span> <span class="nn">ActiveAdmin</span>
+	    <span class="k">class</span> <span class="nc">ResourceController</span> <span class="o">&lt;</span> <span class="no">BaseController</span>
+	      <span class="k">module</span> <span class="nn">DataAccess</span>
+	        <span class="k">def</span> <span class="nf">max_csv_records</span>
+	          <span class="mi">150_000</span>
+	        <span class="k">end</span>
+	        <span class="k">def</span> <span class="nf">max_per_page</span>
+	          <span class="mi">150_000</span>
+	        <span class="k">end</span>
+	      <span class="k">end</span>
+	    <span class="k">end</span>
+	  <span class="k">end</span>
+
+	  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+
+  <span class="k">end</span>
+
+<span class="k">end</span>
+
+
+  
+</pre></div>
