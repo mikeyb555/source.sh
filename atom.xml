@@ -4,7 +4,7 @@
   <title><![CDATA[Source.sh]]></title>
   <link href="http://mikeyb555.github.io/source/atom.xml" rel="self"/>
   <link href="http://mikeyb555.github.io/source/"/>
-  <updated>2014-12-21T16:07:48+10:00</updated>
+  <updated>2014-12-21T22:00:06+10:00</updated>
   <id>http://mikeyb555.github.io/source/</id>
   <author>
     <name><![CDATA[MichaelB]]></name>
@@ -14,11 +14,329 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://mikeyb555.github.io/source/blog/2014/12/21/hello-world/"/>
-    <updated>2014-12-21T14:52:51+10:00</updated>
-    <id>http://mikeyb555.github.io/source/blog/2014/12/21/hello-world</id>
-    <content type="html"><![CDATA[<p>Testing hello world. testing</p>
+    <title type="html"><![CDATA[Simple Reporting and CRUD With Active Admin]]></title>
+    <link href="http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/"/>
+    <updated>2014-12-21T19:38:59+10:00</updated>
+    <id>http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin</id>
+    <content type="html"><![CDATA[<p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
+
+<h1>Installation</h1>
+
+<p>Start by having <a href="https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm">installing Ruby and Rails</a></p>
+
+<p>Create a new rails project, the rails version needs to be earlier than 4.2 as of this post.</p>
+
+<pre><code>rails _4.1.0_ new active-admin-demo
+</code></pre>
+
+<p>Add active admin and devise (for authentication) to the Gemfile.</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;activeadmin&#39;</span><span class="p">,</span> <span class="ss">github</span><span class="p">:</span> <span class="s1">&#39;activeadmin&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;devise&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For 4.x you need to track the github version of active admin.</p>
+
+<p>Run the following commands</p>
+
+<pre><code>rails g active_admin:install   
+rake db:migrate
+rails s
+</code></pre>
+
+<p>Go to <a href="http://localhost:3000/admin">http://localhost:3000/admin</a> and you should see the following login page.</p>
+
+<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_1.png" alt="Alt text" /></p>
+
+<p>Login with <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#97;&#x64;&#109;&#105;&#x6e;&#x40;&#101;&#120;&#x61;&#109;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;">&#x61;&#x64;&#x6d;&#x69;&#110;&#64;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+
+<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_2.png" alt="Alt text" /></p>
+
+<p>So whats going on here? Starting with the url <a href="http://localhost:3000/admin/dashboard">http://localhost:3000/admin/dashboard</a> &lsquo;admin&rsquo; is the <em>namespace</em>, which maps roughly to department for most internal applications. Dashboard is the home page of any namespace. If you click on Admin Users you will be taken to a list of users. This is a <em>resource</em> and every resource has an index page like this, along with the filters on the side and the actions on the top right, in this case the only action is &ldquo;New Admin User&rdquo;.</p>
+
+<h1>Adding Data</h1>
+
+<p>So lets get some actual data in here. For this I will use the Chinook sqlite sample database, <a href="https://chinookdatabase.codeplex.com/downloads/get/557773.">https://chinookdatabase.codeplex.com/downloads/get/557773.</a></p>
+
+<p>Copy this into the db folder, then add the following connection to database.yml.</p>
+
+<figure class='code'><figcaption><span>/config/database.yml</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">data_warehouse</span><span class="p-Indicator">:</span>
+</span><span class='line'><span class="err">    </span>  <span class="l-Scalar-Plain">&lt;&lt;</span><span class="p-Indicator">:</span> <span class="nv">*default</span>
+</span><span class='line'><span class="err">    </span>  <span class="l-Scalar-Plain">database</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">db/Chinook_Sqlite.sqlite</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Multiple connections are not required. It could make sense to install the Active Admin tables (admin_users and comments) in the same database. Alternatively installing AA without authentication and with comments disabled requires no extra tables.</p>
+
+<p>Create employee.rb in app/models with the following</p>
+
+<figure class='code'><figcaption><span>/app/models/employee.rb</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Employee</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">establish_connection</span> <span class="s2">&quot;data_warehouse&quot;</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">table_name</span> <span class="o">=</span> <span class="s2">&quot;Employee&quot;</span>
+</span><span class='line'>  <span class="nb">self</span><span class="o">.</span><span class="n">primary_key</span> <span class="o">=</span> <span class="s1">&#39;EmployeeId&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then go to app/admin and create another file called employee.rb</p>
+
+<figure class='code'><figcaption><span>/app/admin/employee.rb</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">register</span> <span class="no">Employee</span> <span class="k">do</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Restart the rails application and there should be an Employees resource in active admin.</p>
+
+<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_3.png" alt="Alt text" /></p>
+
+<p>Straight away you get a decent looking CRUD for adminstering this table. A more common use for Active Admin is internal reporting, and this does require some customization. The reporting template I use is demonstrated below using the Employees resource.</p>
+
+<figure class='code'><figcaption><span>/app/admin/employee.rb</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> 
+</span><span class='line'><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">register</span> <span class="no">Employee</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#remove unnesecary UI elements and name report</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">clear_action_items!</span>
+</span><span class='line'>  <span class="n">actions</span> <span class="ss">:all</span><span class="p">,</span> <span class="ss">except</span><span class="p">:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">batch_actions</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">menu</span> <span class="ss">:label</span> <span class="o">=&gt;</span> <span class="nb">proc</span><span class="p">{</span> <span class="s2">&quot;Employee Report&quot;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#Narrow filters to useful list</span>
+</span><span class='line'>  <span class="n">filter</span> <span class="ss">:FirstName</span>
+</span><span class='line'>  <span class="n">filter</span> <span class="ss">:LastName</span>
+</span><span class='line'>  <span class="n">filter</span> <span class="ss">:Title</span>
+</span><span class='line'>  <span class="n">filter</span> <span class="ss">:City</span>
+</span><span class='line'>  <span class="n">filter</span> <span class="ss">:Email</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#common queries</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:all</span>
+</span><span class='line'>  <span class="n">scope</span> <span class="ss">:Calgary</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">e</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;city = &#39;Calgary&#39;&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#Remove XML and JSON from download options</span>
+</span><span class='line'>  <span class="n">index</span> <span class="ss">:download_links</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:csv</span><span class="o">]</span><span class="p">,</span> <span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">&quot;Employee Report&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:FirstName</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:LastName</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Title</span>
+</span><span class='line'>      <span class="c1">#Link ReportsTo to Name</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:ReportsTo</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">m</span> <span class="o">=</span> <span class="no">Employee</span><span class="o">.</span><span class="n">find_by_EmployeeId</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">ReportsTo</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span><span class='line'>              <span class="s2">&quot;</span><span class="si">#{</span><span class="n">m</span><span class="o">.</span><span class="n">FirstName</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">m</span><span class="o">.</span><span class="n">LastName</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>              <span class="s2">&quot;&quot;</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:BirthDate</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">e</span><span class="o">.</span><span class="n">BirthDate</span><span class="o">.</span><span class="n">to_date</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:HireDate</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">e</span><span class="o">.</span><span class="n">BirthDate</span><span class="o">.</span><span class="n">to_date</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Address</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:City</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:PostalCode</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Phone</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Fax</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Email</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">csv</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:FirstName</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:LastName</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Title</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:ReportsTo</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">m</span> <span class="o">=</span> <span class="no">Employee</span><span class="o">.</span><span class="n">find_by_EmployeeId</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">ReportsTo</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="k">if</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</span><span class='line'>              <span class="s2">&quot;</span><span class="si">#{</span><span class="n">m</span><span class="o">.</span><span class="n">FirstName</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="n">m</span><span class="o">.</span><span class="n">LastName</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>              <span class="s2">&quot;&quot;</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:BirthDate</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">e</span><span class="o">.</span><span class="n">BirthDate</span><span class="o">.</span><span class="n">to_date</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:HireDate</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">e</span><span class="o">.</span><span class="n">BirthDate</span><span class="o">.</span><span class="n">to_date</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Address</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:City</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:PostalCode</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Phone</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Fax</span>
+</span><span class='line'>      <span class="n">column</span> <span class="ss">:Email</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_7.png" alt="Alt text" /></p>
+
+<h1>Other Customization and Tricks</h1>
+
+<h2>CSV and Comments</h2>
+
+<p>CSV downloads of reports are limited to 20,000 rows by default, which is a hassle for large reports. Additionally the comments functionality of active admin is generally not useful. This can be changed by adding this block to /config/initializers/active_admin.rb</p>
+
+<figure class='code'><figcaption><span>/app/admin/employee.rb</span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">setup</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">site_title</span> <span class="o">=</span> <span class="s2">&quot;Reporting Portal&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#disable comments</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">allow_comments</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">#increase csv limit</span>
+</span><span class='line'>  <span class="k">module</span> <span class="nn">ActiveAdmin</span>
+</span><span class='line'>      <span class="k">class</span> <span class="nc">ResourceController</span> <span class="o">&lt;</span> <span class="no">BaseController</span>
+</span><span class='line'>          <span class="k">module</span> <span class="nn">DataAccess</span>
+</span><span class='line'>              <span class="k">def</span> <span class="nf">max_csv_records</span>
+</span><span class='line'>                  <span class="mi">150_000</span>
+</span><span class='line'>              <span class="k">end</span>
+</span><span class='line'>              <span class="k">def</span> <span class="nf">max_per_page</span>
+</span><span class='line'>                  <span class="mi">150_000</span>
+</span><span class='line'>              <span class="k">end</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Authentication</h2>
+
+<p>In this example I have used the default option of Devise. Often simply disabling authentication is fine for internal apps, especially ones which are only for viewing data rather than changing it. Alternatively authentication through LDAP or Google Apps is a sensible solution for internal applications (net-ldap is a good gem for LDAP integration).</p>
+
+<h2>Gotchas</h2>
+
+<ul>
+<li>tables need a primary key to work as active admin resources</li>
+<li>active admin has had breaking API changes in the past, so relying on older blog posts does not always work. If you dont need to run the latest version of rails the older rubygems packaged version tends to have more code samples</li>
+</ul>
+
 ]]></content>
   </entry>
   
