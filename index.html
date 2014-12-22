@@ -3,127 +3,144 @@
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
 <head>
-  <meta charset="utf-8">
-  <title>The Source.sh</title>
-  <meta name="author" content="MichaelB">
 
-  <!-- Causes trouble with per-article font implementations under /source/_includes/article.html
-  
-  <meta name="description" content="Commbank: Your Australian Financial Operating System Dec 22nd, 2014 1:40 pm If you live in Australia, or are moving to Australia the best bank for &hellip;">
-  &#8211;>
-  
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="cleartype" content="on">
 
-  
-  <link rel="canonical" href="http://mikeyb555.github.io/source">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="The Source.sh" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<title>A Tech Blog by Jake Zimmerman - The Source.sh</title>
+<meta name="author" content="MichaelB">
+
+
+
+
+<meta name="description" content="A tech blog by Jake Zimmerman. Updates occaisonally with tips, tricks, and hacks that have helped me out.">
+
+<meta name="keywords" content="Jekyll theme themes responsive blog modern tech hacks ">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Twitter Cards -->
+
+
+<!-- Open Graph -->
+<meta property="og:local" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://mikeyb555.github.io/source">
+<meta property="og:title" content="A Tech Blog by Jake Zimmerman">
+<meta property="og:description" content="A tech blog by Jake Zimmerman. Updates occaisonally with tips, tricks, and hacks that have helped me out.">
+
+  <meta property="og:image" content="/images/threaded-blue-on-black-cropped.jpg">
+
+<meta property="og:site_name" content="The Source.sh">
+
+<link rel="canonical" href="http://mikeyb555.github.io/source">
+<link href="/favicon.png" rel="icon">
+<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/atom.xml" rel="alternate" title="The Source.sh" type="application/atom+xml">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script>Modernizr || document.write('<script src="/javascripts/vendor/modernizr-2.6.2.custom.min.js"><\/script>') </script>
+
+
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Germania+One" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Lato&subset=latin-ext" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Cardo&subset=latin-ext" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Della+Respira" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=UnifrakturMaguntia&subset=all" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Arimo|EB+Garamond|PT+Sans+Caption&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-57912646-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
 
 
 </head>
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<logo>
 
-<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
-</logo>
+<body id="post-index" class="feature">
+  <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+  <nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="" alt="MichaelB photo" class="author-photo">
+					<h4>MichaelB</h4>
+					<p></p>
+				</li>
+				
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/categories/">All Categories</a></li>
+			</ul>
+		</li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
 
 
+  <div class="entry-header">
+    
+    
+      <div class="entry-image">
+        <img src="/images/threaded-blue-on-black-cropped.jpg" alt="A Tech Blog by Jake Zimmerman">
+      </div><!-- /.entry-image -->
+    
+    <div class="header-title">
+      <div class="header-title-wrap">
+        <h1>The Source.sh</h1>
+        <h2>The Source.</h2>
+      </div><!-- /.header-title-wrap -->
+    </div><!-- /.header-title -->
+  </div><!-- /.entry-header -->
 
-<body >
-  <header role="banner"><hgroup>
-  <h1><a href="/">The Source.sh</a></h1>
+  <div id="main" role="main">
+    
+
+<article class="hentry">
   
-    <h2>The Source.</h2>
-  
-</hgroup>
 
+
+
+<header>
+  <div class="entry-meta">
+    <span class="entry-date date published updated">
+      <time datetime="2014-12-22T13:40:04+10:00">
+        <a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/">December 22, 2014</a>
+      </time>
+    </span>
+    <span class="author vcard">
+      <span class="fn">
+        <a href="" title="About MichaelB">MichaelB</a>
+      </span>
+    </span>
+    
+      &nbsp; &bull; &nbsp;<span class="entry-comments">
+        <a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/#disqus_thread">Comment</a>
+      </span>
+    
+  </div><!-- /.entry-meta -->
+  
+    <h1 class="entry-title">
+      <a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/" rel="bookmark" title="Commbank: Your Australian Financial Operating System" itemprop="url">Commbank: Your Australian Financial Operating System</a>
+    </h1>
+  
 </header>
-  <nav role="navigation"><ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
 
-<br>
-
-      
-        <form action="https://www.google.com/search" method="get">
-          <fieldset role="search">
-            <input type="hidden" name="q" value="site:mikeyb555.github.io/source" />
-      
-      
-            <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-          </fieldset>
-        </form>
-  
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" style="font-family: "><a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/">Commbank: Your Australian Financial Operating System</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-12-22T13:40:04+10:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>1:40 pm</span></time>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content" style="font-family: ; font-size: "><p>If you live in Australia, or are moving to Australia the best bank for the technically inclined is Commonwealth Bank (CBA). This can be a little counterintuive because CBA is not a &ldquo;challenger&rdquo; or competitive brand. Their various rates and charges tend to be on the high side relative to these challengers. However their combination of internet banking, smartphone applications, super and share trading platforms is unbeatable. Behind the scenes this is because CBA are the only bank to have successfully migrated their core systems to a modern platform.</p>
+<div class="entry-content">
+  <p>If you live in Australia, or are moving to Australia the best bank for the technically inclined is Commonwealth Bank (CBA). This can be a little counterintuive because CBA is not a &ldquo;challenger&rdquo; or competitive brand. Their various rates and charges tend to be on the high side relative to these challengers. However their combination of internet banking, smartphone applications, super and share trading platforms is unbeatable. Behind the scenes this is because CBA are the only bank to have successfully migrated their core systems to a modern platform.</p>
 
 <h1>Internet Banking</h1>
 
@@ -156,36 +173,49 @@
 <h2>Account Documents</h2>
 
 <p>A small feature but quite useful. For each account you can generate CBA letterhead documents which confirm account details or balance. It&rsquo;s a good way to give someone account details for a bank transfer.</p>
-</div>
+
   
   
+</div><!-- /.entry-content -->
 
 
-    </article>
+
+
+
+</article><!-- /.hentry -->
+
+<article class="hentry">
   
+
+
+
+<header>
+  <div class="entry-meta">
+    <span class="entry-date date published updated">
+      <time datetime="2014-12-21T19:38:59+10:00">
+        <a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/">December 21, 2014</a>
+      </time>
+    </span>
+    <span class="author vcard">
+      <span class="fn">
+        <a href="" title="About MichaelB">MichaelB</a>
+      </span>
+    </span>
+    
+      &nbsp; &bull; &nbsp;<span class="entry-comments">
+        <a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/#disqus_thread">Comment</a>
+      </span>
+    
+  </div><!-- /.entry-meta -->
   
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title" style="font-family: "><a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/">Simple Reporting and CRUD With Active Admin</a></h1>
-    
-    
-      <p class="meta">
-        
+    <h1 class="entry-title">
+      <a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" rel="bookmark" title="Simple Reporting and CRUD With Active Admin" itemprop="url">Simple Reporting and CRUD With Active Admin</a>
+    </h1>
+  
+</header>
 
-
-
-
-<time class='entry-date' datetime='2014-12-21T19:38:59+10:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>7:38 pm</span></time>
-        
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content" style="font-family: ; font-size: "><p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
+<div class="entry-content">
+  <p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
 
 <h1>Installation</h1>
 
@@ -219,7 +249,7 @@ rails s
 
 <p><img src="/images/posts/aa/aa_1.png" alt="Alt text" /></p>
 
-<p>Login with <a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#97;&#100;&#109;&#x69;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+<p>Login with <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x61;&#100;&#109;&#105;&#x6e;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;">&#x61;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#101;&#x78;&#97;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
 
 <p><img src="/images/posts/aa/aa_2.png" alt="Alt text" /></p>
 
@@ -504,71 +534,54 @@ rails s
 <li>active admin has had breaking API changes in the past, so relying on older blog posts does not always work. If you dont need to run the latest version of rails the older rubygems packaged version tends to have more code samples</li>
 </ul>
 
-</div>
+
   
   
+</div><!-- /.entry-content -->
 
 
-    </article>
+
+
+
+</article><!-- /.hentry -->
+
+
+<div class="pagination">
   
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Website copyright &copy; 2014 - MichaelB |
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>
-</p>
-
-</footer>
+  <a href="/archives">Blog Archives</a>
   
+</div><!-- /.pagination -->
 
-<script type="text/javascript">
-      var disqus_shortname = 'sourcesh';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+  </div><!-- /#main -->
 
+  <div class="footer-wrapper">
+    <footer role="contentinfo">
+      <span>&copy; 2014 MichaelB. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/Z1MM32M4N/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
 
+    </footer>
+  </div><!-- /.footer-wrapper -->
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+<script src="/javascripts/scripts.min.js"></script>
 
   <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-57912646-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
 
 
 
-
+          
+  
 
 </body>
 </html>
