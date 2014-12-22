@@ -4,7 +4,7 @@
   <title><![CDATA[The Source.sh]]></title>
   <link href="http://mikeyb555.github.io/source/atom.xml" rel="self"/>
   <link href="http://mikeyb555.github.io/source/"/>
-  <updated>2014-12-22T18:42:33+10:00</updated>
+  <updated>2014-12-22T18:45:31+10:00</updated>
   <id>http://mikeyb555.github.io/source/</id>
   <author>
     <name><![CDATA[MichaelB]]></name>
@@ -19,6 +19,9 @@
     <updated>2014-12-22T13:40:04+10:00</updated>
     <id>http://mikeyb555.github.io/source/blog/2014/12/22/commbank-your-australian-financial-operating-system</id>
     <content type="html"><![CDATA[<p>If you live in Australia, or are moving to Australia the best bank for the technically inclined is Commonwealth Bank (CBA). This can be a little counterintuive because CBA is not a &ldquo;challenger&rdquo; or competitive brand. Their various rates and charges tend to be on the high side relative to these challengers. However their combination of internet banking, smartphone applications, super and share trading platforms is unbeatable. Behind the scenes this is because CBA are the only bank to have successfully migrated their core systems to a modern platform.</p>
+
+<!-- more -->
+
 
 <h1>Internet Banking</h1>
 
@@ -61,6 +64,9 @@
     <id>http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin</id>
     <content type="html"><![CDATA[<p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
 
+<!-- more -->
+
+
 <h1>Installation</h1>
 
 <p>Start by having <a href="https://www.digitalocean.com/community/tutorials/how-to-install-ruby-on-rails-on-ubuntu-12-04-lts-precise-pangolin-with-rvm">installing Ruby and Rails</a></p>
@@ -93,7 +99,7 @@ rails s
 
 <p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_1.png" alt="Alt text" /></p>
 
-<p>Login with <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#x3a;&#x61;&#100;&#109;&#105;&#x6e;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#x6d;">&#x61;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#101;&#x78;&#97;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+<p>Login with <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#97;&#x64;&#x6d;&#x69;&#110;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;">&#x61;&#100;&#109;&#105;&#110;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#x6c;&#101;&#46;&#x63;&#x6f;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
 
 <p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_2.png" alt="Alt text" /></p>
 
