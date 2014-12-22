@@ -4,7 +4,7 @@
   <title><![CDATA[The Source.sh]]></title>
   <link href="http://mikeyb555.github.io/source/atom.xml" rel="self"/>
   <link href="http://mikeyb555.github.io/source/"/>
-  <updated>2014-12-22T13:16:56+10:00</updated>
+  <updated>2014-12-22T18:19:53+10:00</updated>
   <id>http://mikeyb555.github.io/source/</id>
   <author>
     <name><![CDATA[MichaelB]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Commbank: Your Australian Financial Operating System]]></title>
+    <link href="http://mikeyb555.github.io/source/blog/2014/12/22/commbank-your-australian-financial-operating-system/"/>
+    <updated>2014-12-22T13:40:04+10:00</updated>
+    <id>http://mikeyb555.github.io/source/blog/2014/12/22/commbank-your-australian-financial-operating-system</id>
+    <content type="html"><![CDATA[<p>If you live in Australia, or are moving to Australia the best bank for the technically inclined is Commonwealth Bank (CBA). This can be a little counterintuive because CBA is not a &ldquo;challenger&rdquo; or competitive brand. Their various rates and charges tend to be on the high side relative to these challengers. However their combination of internet banking, smartphone applications, super and share trading platforms is unbeatable. Behind the scenes this is because CBA are the only bank to have successfully migrated their core systems to a modern platform.</p>
+
+<h1>Internet Banking</h1>
+
+<p>CBA were basically first to market with their internet banking product, Netbank. Since then they have actively invested in it to make it far more capable than other banks. Features like online only account creation and live transactions remain science fiction for the other banks. Likewise tasks like informing the bank when you are travelling overseas and ordering replacement cards can be done online, when nearly every other bank requires a phone call.</p>
+
+<p>Oh, and because of the live transactions, you get paid a day earlier than otherwise!</p>
+
+<h1>Smartphone Applications</h1>
+
+<p>The Commbank app is the best on the market. Most of the features of netbank are available in a easy to use format. They are also constantly adding features, for example recently the option to temporarily lock a credit card has been added. This is great for when you have misplaced a card but want to hold off cancelling it. Their iPad apps are a bit of a disaster though. The Commsec app for trading is also really good, but the iPad version of both Commbank and Commsec are very average.</p>
+
+<h1>Stock trading</h1>
+
+<p>Commsec is CBA&rsquo;s trading platform and its great. Hands down the best thing is how it links to Netbank, you dont need to fill in (and fax!) heaps of forms to sign up. Also whenever you login to netbank you see your overall portfolio value.</p>
+
+<h1>Super</h1>
+
+<p>CBA&rsquo;s super product is not the best value, but being linked directly to Netbank makes up for that. Signing up pulls all your details from Netbank so less forms to fill out, and they provide tools to consolidate your super, and prefilled forms to give to your employer. Super is easy to forget about, which also means forgetting the outrageous admin fees they are charging if you move employers without consolidating super. A visible super balance in Netbank solves those problems.</p>
+
+<h1>Innovations</h1>
+
+<h2>Kaching</h2>
+
+<p>Kaching was launched as a simple way to transfer money to friends. It has now been rolled up into the main commbank app but remains very useful. Getting BSB&rsquo;s and account numbers of friends and waiting for money to transfer sucks. Kaching lets you simply text them a code which they can enter on the CBA website, and enter the bank details themselves. Additionally if the other person has a CBA account the transfer is zero-touch and instant. As an example of when this is great, one night out a friend lost his credit card. He was able to use his phone to transfer money to me while we waited in line for the ATM, and then I withdrew cash for the week until the replacement card arrived.</p>
+
+<h2>Cardless Cash</h2>
+
+<p>I thought this was pretty weird when it first came out. Basically you get given a one time use code you can put in an ATM, and a pre determined amount of cash comes out. Its pretty great if you are paranoid about card skimming though. Still weird.</p>
+
+<h2>Account Documents</h2>
+
+<p>A small feature but quite useful. For each account you can generate CBA letterhead documents which confirm account details or balance. It&rsquo;s a good way to give someone account details for a bank transfer.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Simple Reporting and CRUD With Active Admin]]></title>
@@ -52,7 +93,7 @@ rails s
 
 <p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_1.png" alt="Alt text" /></p>
 
-<p>Login with <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x61;&#x64;&#109;&#x69;&#x6e;&#64;&#101;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#x61;&#100;&#109;&#105;&#x6e;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#109;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+<p>Login with <a href="&#x6d;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#97;&#100;&#109;&#x69;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x61;&#x64;&#109;&#x69;&#x6e;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#109;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
 
 <p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_2.png" alt="Alt text" /></p>
 
