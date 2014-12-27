@@ -1,123 +1,228 @@
-// Padding used for layout margins
-$pad-min: 3% !default;
-$pad-narrow: 6% !default;
-$pad-medium: 10% !default;
-$pad-wide: 25% !default;
-
-$indented-lists: false !default;
-
-$header-font-size: 1em !default;
-$header-padding-top: 5.5em !default;
-$header-padding-bottom: 0 !default;
-
-.group { @include pie-clearfix; }
-
 body {
-  -webkit-text-size-adjust: none;
-  border-top: 8px solid #333;
-  position: relative;
-  margin: 0 auto;
-  > header, > nav, > footer, #content > article, #content > div > article, #content > div > section {
-    @extend .group;
-    padding-left: $pad-min;
-    padding-right: $pad-min;
-    @media only screen and (min-width: 480px) {
-      padding-left: $pad-narrow;
-      padding-right: $pad-narrow;
-    }
-    @media only screen and (min-width: 768px) {
-      padding-left: $pad-medium;
-      padding-right: $pad-medium;
-    }
-    @media only screen and (min-width: 992px) {
-      padding-left: $pad-wide;
-      padding-right: $pad-wide;
-    }
-  }
-  div.pagination {
-    @extend .group;
-    margin-left: $pad-min;
-    margin-right: $pad-min;
-    @media only screen and (min-width: 480px) {
-      margin-left: $pad-narrow;
-      margin-right: $pad-narrow;
-    }
-    @media only screen and (min-width: 768px) {
-      margin-left: $pad-medium;
-      margin-right: $pad-medium;
-    }
-    @media only screen and (min-width: 992px) {
-      margin-left: $pad-wide;
-      margin-right: $pad-wide;
-    }
-  }
-  > header {
-    font-size: $header-font-size;
-    padding-top: $header-padding-top;
-    padding-bottom: $header-padding-bottom;
-  }
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background-color: $body-color;
 }
 
-#content {
-  overflow: hidden;
-  > div, > article { 
-    text-align:justify;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+// Main
+// --------------------------------------------------
+.entry,
+.hentry {
+	@include clearfix();
+}
+.entry-content {
+	@include font-rem($p_fs);
+  @include line-height($p_lh);
+  @include margin-after;
+	// Dotted line underlines for links
+	p > a:not(.image-link),
+	li > a:not(.image-link) {
+		border-bottom: 1px dotted lighten($link-color, 50%);
+		&:hover {
+			border-bottom-style: solid;
+		}
+	}
 }
 
-.flex-content { max-width: 100%; height: auto; }
-
-.basic-alignment {
-  &.left { float: left; margin-right: 1.5em; }
-  &.right { float: right; margin-left: 1.5em; }
-  &.center { display:block; margin: 0 auto 1.5em; }
-  &.left, &.right { margin-bottom: 0; }
+// Single Post and Page
+// --------------------------------------------------
+.entry-meta {
+	@include font-rem($footer_fs);
+	text-transform: uppercase;
+	color: lighten($base-color,60%);
+	a {
+		color: lighten($base-color,60%);
+	}
+	.vcard {
+		&:before {
+			content: " by ";
+		}
+	}
+	.tag {
+		display: inline-block;
+		margin: 4px;
+		padding: 2px 6px;
+		background-color: lighten($base-color,60%);
+		color: $white;
+		@include border-radius(3px);
+		color: $white;
+		span {
+			vertical-align: super;
+			@include font-rem($super_fs);
+		}
+		&:hover {
+			background-color: lighten($base-color,50%);
+		}
+		&:active {
+			@include translate(0, 1px);
+	        box-shadow: 0 0 1px rgba($base-color,0.20);
+		}
+	}
+}
+#post,
+#page {
+	.entry-content {
+		margin: 40px 2px 20px 2px;
+		padding: 10px 15px;
+		background-color: $white;
+		box-shadow: 0 0 0 0, 0 6px 12px rgba($black,0.10);
+		@include border-radius(3px);
+		@media #{$medium} {
+			margin-left: 10px;
+			margin-right: 10px;
+			padding: 20px 30px;
+		}
+		@media #{$large} {
+			max-width: 800px;
+			margin: 50px auto 30px auto;
+			padding: 50px 80px;
+			> p:first-child {
+				@include font-rem($p1_fs);
+				@include line-height($p1_lh);
+        @include margin-after
+			}
+		}
+	}
+	#disqus_thread {
+		margin: 40px 2px 20px 2px;
+		padding: 10px 15px;
+		background-color: $white;
+		box-shadow: 0 0 0 1px rgba($border-color,0.10), 0 6px 12px rgba($black,0.10);
+		@include border-radius(3px);
+		@media #{$medium} {
+			margin-left: 10px;
+			margin-right: 10px;
+			padding: 20px 30px;
+		}
+		@media #{$large} {
+			max-width: 800px;
+			padding: 50px 80px;
+			margin: 0 auto 30px auto;
+		}
+	}
+	.entry-meta {
+		margin: 50px 30px 30px;
+		text-align: center;
+	}
+}
+.entry-tags {
+	display: block;
+	margin-bottom: 6px;
+}
+// Post Pagination Module
+.pagination {
+	margin: 20px 10px;
+	text-align: center;
+	ul {
+		display: inline;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	li {
+		padding-left: 4px;
+		padding-right: 4px;
+	}
+	.current-page {
+		font-weight: 700;
+	}
 }
 
-@media only screen and (min-width: 550px) {
-  body > header { font-size: $header-font-size; }
+
+// Post Index 
+// --------------------------------------------------
+#post-index {
+	#main {
+		margin: 40px 2px 20px 2px;
+		@media #{$medium} {
+			margin-left: 20px;
+			margin-right: 20px;
+		}
+		@media #{$large} {
+			max-width: 800px;
+			margin-top: 50px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+	article {
+		background-color: $white;
+		box-shadow: 0 0 0 0, 0 6px 12px rgba($base-color,0.10);
+		@include border-radius(3px);
+		margin-bottom: 20px;
+		padding: 25px 15px;
+		@media #{$medium} {
+			padding: 30px;
+		}
+		@media #{$large} {
+			margin-bottom: 30px;
+			padding: 50px 80px;
+		}
+	}
 }
 
-#main, #content, {
-  @extend .group;
-}
-@media only screen and (min-width: 768px) {
-  body { -webkit-text-size-adjust: auto; }
-  body > header { font-size: $header-font-size * 1.2; }
-  #main {
-    padding: 0;
-    margin: 0 auto;
-  }
-  #content {
-    overflow: visible;
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-    > div, > article {
-      padding-top: $pad-medium/2;
-      padding-bottom: 0;
-    }
-  }
+// Footer
+// --------------------------------------------------
+.footer-wrapper {
+	@include clearfix();
+	margin: 2em auto;
+	text-align: center;
+	color: lighten($text-color,20%);
+	a {
+		color: lighten($text-color,20%);
+	}
 }
 
-@media only screen and (min-width: 992px) {
-  body > header { font-size: $header-font-size * 1.3; }
-  #content { margin-right: auto;
-  margin-left: auto; }
-  #content {
-    > div, > article {
-      padding-top: $pad-wide/9;
-      padding-bottom: 0;
-    }
-  }
+// Social Share
+// --------------------------------------------------
+.socialcount {
+	@include font-rem($socialcount_fs);
+	font-weight: 700;
+	li { 
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	p > a,
+	li > a {
+		border-bottom-width: 0;
+	}
 }
 
-@if $indented-lists == false {
-  @media only screen and (min-width: 768px) {
-    ul, ol { margin-left: 0; }
-  }
+
+// Browser Upgrade
+// --------------------------------------------------
+.upgrade {
+	padding: 10px;
+	text-align: center;
 }
 
+// Google Search
+// --------------------------------------------------
+#goog-fixurl {
+	ul {
+		list-style: none;
+		margin-left: 0;
+		padding-left: 0;
+		li {
+			list-style-type: none;
+		}
+	}
+}
+#goog-wm-qt {
+	width: auto;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	padding: 8px 20px;
+	display: inline-block;
+  // TODO Figure out where this id is applied and add sass font variable
+	@include font-rem(0.875);
+	background-color: $white;
+	color: $primary;
+	border-width: 2px !important;
+	border-style: solid !important;
+	border-color: lighten($primary,50%);
+	@include border-radius(3px);
+}
+#goog-wm-sb {
+	.btn{};
+}

@@ -2,9 +2,9 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://mikeyb555.github.io/source
-title: Source.sh
-subtitle: A blogging framework for hackers.
+url: http://source.sh
+title: The Source.sh
+subtitle: The Source.
 author: MichaelB
 simple_search: https://www.google.com/search
 description:
@@ -91,11 +91,11 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
+disqus_short_name: sourcesh
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-57912646-1
 
 # Facebook Like
-facebook_like: false
+facebook_like: true

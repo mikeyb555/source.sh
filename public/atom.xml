@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Source.sh]]></title>
-  <link href="http://mikeyb555.github.io/source/atom.xml" rel="self"/>
-  <link href="http://mikeyb555.github.io/source/"/>
-  <updated>2014-12-21T22:00:06+10:00</updated>
-  <id>http://mikeyb555.github.io/source/</id>
+  <title><![CDATA[The Source.sh]]></title>
+  <link href="http://source.sh/atom.xml" rel="self"/>
+  <link href="http://source.sh/"/>
+  <updated>2014-12-27T22:30:55+10:00</updated>
+  <id>http://source.sh/</id>
   <author>
     <name><![CDATA[MichaelB]]></name>
     
@@ -14,11 +14,96 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Selling Enterprise Software]]></title>
+    <link href="http://source.sh/blog/2014/12/27/selling-enterprise-software/"/>
+    <updated>2014-12-27T21:59:18+10:00</updated>
+    <id>http://source.sh/blog/2014/12/27/selling-enterprise-software</id>
+    <content type="html"><![CDATA[<p>Interesting read from Kalzumeus.</p>
+
+<blockquote><p>All internal users hate the purchasing process because it inhibits their ability to get work done. Successful Enterprise sales is about finding an internal champion who really wants your product like they want oxygen, and then allying with that person against their own employer. One of the easiest ways to do this is allowing them to exercise any loophole their Purchasing Department provides.</p><p>Because the whole rigamarole costs several hundred dollars in employee salary to approve any PO, most internal Purchasing Departments have a few enumerated exceptions. One is an upper limit on expenses a worker or low-level manager can approve on their own authority without ceremony, generally by putting them on a corporate credit card</p></blockquote>
+
+
+<p>As part of my job I am often looking at SaaS products. I like to do a bit of research here so I have a solid idea of how to use the platform, ie. become a better &lsquo;internal champion&rsquo; when selling the solution to management.</p>
+
+<p>I would extend the above concept in two ways</p>
+
+<!-- more -->
+
+
+<ol>
+<li>Offer &ldquo;no credit card&rdquo; trials</li>
+<li>Don&rsquo;t force collection of a contact phone number</li>
+</ol>
+
+
+<p>No CC makes the trial phase easier for obvious reasons, however 2 is even more annoying because the trend now with SaaS products is to immediately call trial customers. If I give my internal number I waste time fielding sales calls, something I have no authority or capacity for as a developer. A more appropriate management/procurement number leads to my boss getting calls from a company he knows nothing about.</p>
+
+<p>I think a more appropriate model for these kinds of sales would be to include a &ldquo;developer trial&rdquo; before the normal trial. So a developer can sign up without a contact phone number, and at the end of the trial can pass along details for the Purchasing team, where the normal trial funnel begins.</p>
+
+<p>Changing to this two phase trial could enable further customization like</p>
+
+<ul>
+<li>Loading the trial account with dummy data instead of trying to setup with business data that the developer may not have permission to use yet - Xero does an excellent job of this</li>
+<li>Make sure API access is included</li>
+<li>Skip the marketing around pricing and plans as this isn&rsquo;t relevant for the developer</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Commbank: Your Australian Financial Operating System]]></title>
+    <link href="http://source.sh/blog/2014/12/22/commbank-your-australian-financial-operating-system/"/>
+    <updated>2014-12-22T13:40:04+10:00</updated>
+    <id>http://source.sh/blog/2014/12/22/commbank-your-australian-financial-operating-system</id>
+    <content type="html"><![CDATA[<p>If you live in Australia, or are moving to Australia the best bank for the technically inclined is Commonwealth Bank (CBA). This can be a little counterintuive because CBA is not a &ldquo;challenger&rdquo; or competitive brand. Their various rates and charges tend to be on the high side relative to these challengers. However their combination of internet banking, smartphone applications, super and share trading platforms is unbeatable. Behind the scenes this is because CBA are the only bank to have successfully migrated their core systems to a modern platform.</p>
+
+<!-- more -->
+
+
+<h1>Internet Banking</h1>
+
+<p>CBA were basically first to market with their internet banking product, Netbank. Since then they have actively invested in it to make it far more capable than other banks. Features like online only account creation and live transactions remain science fiction for the other banks. Likewise tasks like informing the bank when you are travelling overseas and ordering replacement cards can be done online, when nearly every other bank requires a phone call.</p>
+
+<p>Oh, and because of the live transactions, you get paid a day earlier than otherwise!</p>
+
+<h1>Smartphone Applications</h1>
+
+<p>The Commbank app is the best on the market. Most of the features of netbank are available in a easy to use format. They are also constantly adding features, for example recently the option to temporarily lock a credit card has been added. This is great for when you have misplaced a card but want to hold off cancelling it. Their iPad apps are a bit of a disaster though. The Commsec app for trading is also really good, but the iPad version of both Commbank and Commsec are very average.</p>
+
+<h1>Stock trading</h1>
+
+<p>Commsec is CBA&rsquo;s trading platform and its great. Hands down the best thing is how it links to Netbank, you dont need to fill in (and fax!) heaps of forms to sign up. Also whenever you login to netbank you see your overall portfolio value.</p>
+
+<h1>Super</h1>
+
+<p>CBA&rsquo;s super product is not the best value, but being linked directly to Netbank makes up for that. Signing up pulls all your details from Netbank so less forms to fill out, and they provide tools to consolidate your super, and prefilled forms to give to your employer. Super is easy to forget about, which also means forgetting the outrageous admin fees they are charging if you move employers without consolidating super. A visible super balance in Netbank solves those problems.</p>
+
+<h1>Innovations</h1>
+
+<h2>Kaching</h2>
+
+<p>Kaching was launched as a simple way to transfer money to friends. It has now been rolled up into the main commbank app but remains very useful. Getting BSB&rsquo;s and account numbers of friends and waiting for money to transfer sucks. Kaching lets you simply text them a code which they can enter on the CBA website, and enter the bank details themselves. Additionally if the other person has a CBA account the transfer is zero-touch and instant. As an example of when this is great, one night out a friend lost his credit card. He was able to use his phone to transfer money to me while we waited in line for the ATM, and then I withdrew cash for the week until the replacement card arrived.</p>
+
+<h2>Cardless Cash</h2>
+
+<p>I thought this was pretty weird when it first came out. Basically you get given a one time use code you can put in an ATM, and a pre determined amount of cash comes out. Its pretty great if you are paranoid about card skimming though. Still weird.</p>
+
+<h2>Account Documents</h2>
+
+<p>A small feature but quite useful. For each account you can generate CBA letterhead documents which confirm account details or balance. It&rsquo;s a good way to give someone account details for a bank transfer.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Simple Reporting and CRUD With Active Admin]]></title>
-    <link href="http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/"/>
+    <link href="http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/"/>
     <updated>2014-12-21T19:38:59+10:00</updated>
-    <id>http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin</id>
+    <id>http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin</id>
     <content type="html"><![CDATA[<p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
+
+<!-- more -->
+
 
 <h1>Installation</h1>
 
@@ -50,11 +135,11 @@ rails s
 
 <p>Go to <a href="http://localhost:3000/admin">http://localhost:3000/admin</a> and you should see the following login page.</p>
 
-<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_1.png" alt="Alt text" /></p>
+<p><img src="http://source.sh/images/posts/aa/aa_1.png" alt="Alt text" /></p>
 
-<p>Login with <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#97;&#x64;&#109;&#105;&#x6e;&#x40;&#101;&#120;&#x61;&#109;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;">&#x61;&#x64;&#x6d;&#x69;&#110;&#64;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+<p>Login with <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x61;&#100;&#109;&#105;&#110;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#97;&#100;&#109;&#x69;&#110;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#x6f;&#109;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
 
-<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_2.png" alt="Alt text" /></p>
+<p><img src="http://source.sh/images/posts/aa/aa_2.png" alt="Alt text" /></p>
 
 <p>So whats going on here? Starting with the url <a href="http://localhost:3000/admin/dashboard">http://localhost:3000/admin/dashboard</a> &lsquo;admin&rsquo; is the <em>namespace</em>, which maps roughly to department for most internal applications. Dashboard is the home page of any namespace. If you click on Admin Users you will be taken to a list of users. This is a <em>resource</em> and every resource has an index page like this, along with the filters on the side and the actions on the top right, in this case the only action is &ldquo;New Admin User&rdquo;.</p>
 
@@ -104,7 +189,7 @@ rails s
 
 <p>Restart the rails application and there should be an Employees resource in active admin.</p>
 
-<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_3.png" alt="Alt text" /></p>
+<p><img src="http://source.sh/images/posts/aa/aa_3.png" alt="Alt text" /></p>
 
 <p>Straight away you get a decent looking CRUD for adminstering this table. A more common use for Active Admin is internal reporting, and this does require some customization. The reporting template I use is demonstrated below using the Employees resource.</p>
 
@@ -270,7 +355,7 @@ rails s
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><img src="http://mikeyb555.github.io/source/images/posts/aa/aa_7.png" alt="Alt text" /></p>
+<p><img src="http://source.sh/images/posts/aa/aa_7.png" alt="Alt text" /></p>
 
 <h1>Other Customization and Tricks</h1>
 

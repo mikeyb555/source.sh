@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://mikeyb555.github.io/source/sitemap.xml 
+Sitemap: http://source.sh/sitemap.xml 

@@ -3,10 +3,13 @@ layout: post
 title: "Simple Reporting and CRUD with Active Admin"
 date: 2014-12-21 19:38:59 +1000
 comments: true
+share: true
 categories: 
 ---
 
 Active Admin is the best way to build simple CRUD's to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.
+
+<!-- more -->
 
 #Installation
 
@@ -184,6 +187,8 @@ ActiveAdmin.register Employee do
 end
 
 {% endcodeblock %}
+
+
 
 
 ![Alt text](/images/posts/aa/aa_7.png)

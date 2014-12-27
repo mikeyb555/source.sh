@@ -3,113 +3,112 @@
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
 <head>
-  <meta charset="utf-8">
-  <title>Simple Reporting and CRUD With Active Admin - Source.sh</title>
-  <meta name="author" content="MichaelB">
 
-  <!-- Causes trouble with per-article font implementations under /source/_includes/article.html
-  
-  <meta name="description" content="Simple Reporting and CRUD With Active Admin Dec 21st, 2014 7:38 pm Active Admin is the best way to build simple CRUD&rsquo;s to collect and report &hellip;">
-  &#8211;>
-  
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="cleartype" content="on">
 
-  
-  <link rel="canonical" href="http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Source.sh" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<title>Simple Reporting and CRUD With Active Admin - The Source.sh</title>
+<meta name="author" content="MichaelB">
+
+
+
+
+<meta name="description" content="Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and &hellip;">
+
+<meta name="keywords" content=" ">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Twitter Cards -->
+
+
+<!-- Open Graph -->
+<meta property="og:local" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin">
+<meta property="og:title" content="Simple Reporting and CRUD with Active Admin">
+<meta property="og:description" content="Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and &hellip;">
+
+  <meta property="og:image" content="">
+
+<meta property="og:site_name" content="The Source.sh">
+
+<link rel="canonical" href="http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin">
+<link href="/favicon.png" rel="icon">
+<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/atom.xml" rel="alternate" title="The Source.sh" type="application/atom+xml">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script>Modernizr || document.write('<script src="/javascripts/vendor/modernizr-2.6.2.custom.min.js"><\/script>') </script>
+
+
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Poller+One" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Germania+One" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Fontdiner+Swanky" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Lato&subset=latin-ext" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Cardo&subset=latin-ext" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Sorts+Mill+Goudy" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=Della+Respira" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=UnifrakturMaguntia&subset=all" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Arimo|EB+Garamond|PT+Sans+Caption&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
-  
 
 </head>
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<logo>
 
-<img src="/logo.png" alt="Website Logo. Upload to /source/logo.png ; disable in /source/_includes/logo.html" height="32px" width="32px">
-</logo>
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="" alt="MichaelB photo" class="author-photo">
+					<h4>MichaelB</h4>
+					<p></p>
+				</li>
+				
+				
+				
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="/posts/">All Posts</a></li>
+				<li><a href="/categories/">All Categories</a></li>
+			</ul>
+		</li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
 
 
 
-<body >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Source.sh</a></h1>
-  
-    <h2>A blogging framework for hackers.</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-<br>
-
-      
-        <form action="https://www.google.com/search" method="get">
-          <fieldset role="search">
-            <input type="hidden" name="q" value="site:mikeyb555.github.io/source" />
-      
-      
-            <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-          </fieldset>
-        </form>
-  
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      
-        <h1 class="entry-title" style="font-family: ">Simple Reporting and CRUD With Active Admin</h1>
-      
-    
-    
-      <p class="meta">
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
         
-
-
-
-
-<time class='entry-date' datetime='2014-12-21T19:38:59+10:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>7:38 pm</span></time>
+          <h1 class="entry-title"><a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" rel="bookmark" title="Simple Reporting and CRUD with Active Admin">Simple Reporting and CRUD with Active Admin</a></h1>
         
-        
-      </p>
-    
-  </header>
+        <h2>December 21, 2014</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
 
+<!-- more -->
 
-<div class="entry-content" style="font-family: ; font-size: "><p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
 
 <h1>Installation</h1>
 
@@ -143,7 +142,7 @@ rails s
 
 <p><img src="/images/posts/aa/aa_1.png" alt="Alt text" /></p>
 
-<p>Login with <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#97;&#x64;&#109;&#105;&#x6e;&#x40;&#101;&#120;&#x61;&#109;&#112;&#x6c;&#101;&#46;&#x63;&#x6f;&#109;">&#x61;&#x64;&#x6d;&#x69;&#110;&#64;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+<p>Login with <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x61;&#100;&#109;&#105;&#110;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#97;&#100;&#109;&#x69;&#110;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#x6f;&#109;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
 
 <p><img src="/images/posts/aa/aa_2.png" alt="Alt text" /></p>
 
@@ -428,77 +427,93 @@ rails s
 <li>active admin has had breaking API changes in the past, so relying on older blog posts does not always work. If you dont need to run the latest version of rails the older rubygems packaged version tends to have more code samples</li>
 </ul>
 
-</div>
 
-
-  <footer class="page-footer">
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Text authored by <span class="fn">MichaelB</span></span>
-
-
-      
-
-
-
-
-<time class='entry-date' datetime='2014-12-21T19:38:59+10:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>7:38 pm</span></time>
-      
-      
-
-
-    </p>
+      <footer class="entry-meta">
+        <span class="entry-tags"></span>
+        <span><a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" rel="bookmark" title="Simple Reporting and CRUD with Active Admin">Simple Reporting and CRUD with Active Admin</a> was published on <span class="entry-date date published updated"><time datetime="2014-12-21T19:38:59+10:00">December 21, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="" title="About MichaelB">MichaelB</a></span></span>
+        <div class="social-share">
+          <ul class="socialcount socialcount-small inline-list">
+            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
+            <li class="twitter"><a href="https://twitter.com/intent/tweet?text=/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
+            <li class="googleplus"><a href="https://plus.google.com/share?url=/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
+          </ul>
+        </div><!-- /.social-share -->
+      </footer>
+    </div><!-- /.entry-content -->
     
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" data-via="" data-counturl="http://mikeyb555.github.io/source/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" >Tweet</a>
-  
-  
-  
-</div>
-
+      <div class="read-more">
+        
+          <div class="read-more-header">
+            <a href="/blog/2014/12/27/selling-enterprise-software/" class="btn">Read More</a>
+          </div><!-- /.read-more-header -->
+          <div class="read-more-content">
+            <h3><a href="/blog/2014/12/27/selling-enterprise-software/" title="Selling Enterprise Software">Selling Enterprise Software</a></h3>
+            <p>Interesting read from Kalzumeus. {% blockquote %}All internal users hate the purchasing process because it inhibits their ability to get &hellip;&hellip; <a href="/blog/2014/12/27/selling-enterprise-software/"> Continue reading</a></p>
+          </div><!-- /.read-more-content -->
+        
+        <div class="read-more-list">
+          
+            <div class="list-item">
+              <h4><a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/" title="Commbank: Your Australian Financial Operating System">Commbank: Your Australian Financial Operating System</a></h4>
+              <span>Published on December 22, 2014</span>
+            </div><!-- /.list-item -->
+          
+        </div><!-- /.read-more-list -->
+      </div><!-- /.read-more -->
     
-    <p class="meta">
-      
-      
-    </p>
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 MichaelB. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/Z1MM32M4N/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
+
   </footer>
-</article>
+</div><!-- /.footer-wrapper -->
 
 
-</div>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Website copyright &copy; 2014 - MichaelB |
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/TheChymera/Koenigspress">Königspress</a></span>
-</p>
-
-</footer>
-  
-
-
-
-
-
-
+	        
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+<script src="/javascripts/scripts.min.js"></script>
 
   <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-57912646-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
   </script>
 
 
 
 
+<script type="text/javascript">
+      var disqus_shortname = 'sourcesh';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/';
+        var disqus_url = 'http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+	        
 
 </body>
 </html>
