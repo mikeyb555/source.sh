@@ -77,7 +77,7 @@ exports.handler = function(event, context) {
 
         var params = {
             Bucket: 'your_bucket_name',
-            Key: 'cloudtrail_' + time_string,
+            Key: Math.random().toString(36).substr(2, 4) + 'cloudtrail_' + time_string,
             Body: logs
         };
         bucket.putObject(params, function(err, data) {

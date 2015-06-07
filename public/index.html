@@ -144,7 +144,7 @@
 
 <p>This blog post will explain how you can leverage Lambda to create automated data pipelines for CloudWatch, with no dedicated compute resources. The focus will be on exporting logs to objects in S3, but the same concept can be used to enable any sort of custom processing within the constraints of Lambda.</p>
 
-<p>Exporting to S3 is a good place to start as this allows you to run Hive or other log processing software on the exported logs. The source we will as use an example is CloudTrail, however the same method applies to any CloudWatch log. Its worth noting that CloudTrail logs can already be automatically exported to S3 within the AWS console, it is simply used as a convenient source for the log group if you dont have any existing sources.</p>
+<p>Exporting to S3 is a good place to start as this allows you to run Hive or other log processing software on the exported logs. The source we will as use an example is CloudTrail, however the same method applies to any CloudWatch log. It&rsquo;s worth noting that CloudTrail logs can already be automatically exported to S3 within the AWS console, it is simply used as a convenient source for the log group if you dont have any existing sources.</p>
 
 <h2>Before Starting</h2>
 
@@ -153,9 +153,9 @@
 <p>Once you have a log group setup follow the steps in <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html">Real-time Processing of Log Data with Subscriptions</a>. This documentation is quite new so I did come across a few gotchas:</p>
 
 <ul>
-<li>make sure your aws-cli is completely up to date, you will know its not if <code>aws logs put-subscription-filter</code> is not a valid command</li>
+<li>make sure your aws-cli is completely up to date, you will know it&rsquo;s not if <code>aws logs put-subscription-filter</code> is not a valid command</li>
 <li>Configure your Kinesis stream within us-east-1, eu-west-1 or us-west-2, as your stream needs to be in the same region as your Lambda functions for the next steps</li>
-<li>if you are following all the steps in the guide its actually <code>base64 -d</code> not <code>base64 -D</code></li>
+<li>if you are following all the steps in the guide it&rsquo;s actually <code>base64 -d</code> not <code>base64 -D</code></li>
 </ul>
 
 
@@ -259,7 +259,7 @@
 </span><span class='line'>
 </span><span class='line'>        <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
 </span><span class='line'>            <span class="nx">Bucket</span><span class="o">:</span> <span class="s1">&#39;your_bucket_name&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">Key</span><span class="o">:</span> <span class="s1">&#39;cloudtrail_&#39;</span> <span class="o">+</span> <span class="nx">time_string</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">Key</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;cloudtrail_&#39;</span> <span class="o">+</span> <span class="nx">time_string</span><span class="p">,</span>
 </span><span class='line'>            <span class="nx">Body</span><span class="o">:</span> <span class="nx">logs</span>
 </span><span class='line'>        <span class="p">};</span>
 </span><span class='line'>        <span class="nx">bucket</span><span class="p">.</span><span class="nx">putObject</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
