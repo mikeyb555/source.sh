@@ -1,0 +1,7 @@
+<div class="highlight"><pre><span class="err">aws</span> <span class="err">lambda</span> <span class="err">create-event-source-mapping</span> <span class="err">\</span>
+<span class="err">--region</span> <span class="err">us-east</span><span class="mi">-1</span> <span class="err">\</span>
+<span class="err">--function-name</span> <span class="err">cloudwatchtos</span><span class="mi">3</span> <span class="err">\</span>
+<span class="err">--event-source</span>  <span class="s2">&quot;the_arn_of_your_kinesis_stream&quot;</span> <span class="err">\</span>
+<span class="err">--batch-size</span> <span class="mi">100</span> <span class="err">\</span>
+<span class="err">--starting-position</span> <span class="err">TRIM_HORIZON</span> <span class="err">\</span>
+</pre></div>

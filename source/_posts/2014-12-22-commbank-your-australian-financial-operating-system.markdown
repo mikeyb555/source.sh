@@ -2,7 +2,7 @@
 layout: post
 title: "Commbank: Your Australian Financial Operating System"
 image:
-  feature: http://source.sh/images/posts/cba/CBP-Branch.jpg
+  feature: http://source.sh/images/posts/es/es-hero.png
 date: 2014-12-22 13:40:04 +1000
 share: true
 comments: true

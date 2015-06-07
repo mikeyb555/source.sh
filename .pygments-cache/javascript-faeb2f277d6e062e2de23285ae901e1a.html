@@ -1,0 +1,26 @@
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">grunt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;grunt&#39;</span><span class="p">);</span>
+<span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-aws-lambda&#39;</span><span class="p">);</span>
+
+<span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+    <span class="nx">lambda_invoke</span><span class="o">:</span> <span class="p">{</span>
+        <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">lambda_deploy</span><span class="o">:</span> <span class="p">{</span>
+        <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">region</span><span class="o">:</span> <span class="s1">&#39;us-east-1&#39;</span>
+            <span class="p">},</span>
+            <span class="kd">function</span><span class="o">:</span> <span class="s1">&#39;cloudwatchtos3&#39;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">lambda_package</span><span class="o">:</span> <span class="p">{</span>
+        <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+
+
+<span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;deploy&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;lambda_package&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda_deploy&#39;</span><span class="p">]);</span>
+</pre></div>

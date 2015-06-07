@@ -3,6 +3,8 @@ layout: post
 title: "Selling Enterprise Software"
 date: 2014-12-27 21:59:18 +1000
 comments: true
+image:
+  feature: http://source.sh/images/posts/es/es-hero.png
 external_url: https://training.kalzumeus.com/newsletters/archive/enterprise_sales
 share: true
 ---

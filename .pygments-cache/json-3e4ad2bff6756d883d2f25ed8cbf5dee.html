@@ -1,0 +1,42 @@
+<div class="highlight"><pre>	<span class="p">{</span>
+	  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;cloudwatchtos3&quot;</span><span class="p">,</span>
+	  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+	  <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Processes Kinesis events from CloudWatch&quot;</span><span class="p">,</span>
+	  <span class="nt">&quot;private&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+	  <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+	    <span class="nt">&quot;async&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.0&quot;</span>
+	  <span class="p">},</span>
+	  <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+	      <span class="nt">&quot;grunt&quot;</span><span class="p">:</span> <span class="s2">&quot;0.4.*&quot;</span><span class="p">,</span>
+	      <span class="nt">&quot;grunt-aws-lambda&quot;</span><span class="p">:</span> <span class="s2">&quot;0.3.0&quot;</span><span class="p">,</span>
+	      <span class="nt">&quot;aws-sdk&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.23&quot;</span><span class="p">,</span>
+	      <span class="nt">&quot;async&quot;</span><span class="p">:</span> <span class="s2">&quot;1,2.0&quot;</span>
+	  <span class="p">},</span>
+	  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+	  <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;BSD&quot;</span>
+	<span class="p">}</span>
+
+<span class="err">GruntFile.js</span>
+
+<span class="err">var</span> <span class="err">grunt</span> <span class="err">=</span> <span class="err">require(&#39;grunt&#39;);</span>
+<span class="err">grunt.loadNpmTasks(&#39;grunt-aws-lambda&#39;);</span>
+
+<span class="err">grunt.initConfig(</span><span class="p">{</span>
+    <span class="err">lambda_invoke:</span> <span class="err">{</span>
+        <span class="err">default:</span> <span class="err">{</span>
+        <span class="p">}</span>
+    <span class="err">},</span>
+    <span class="err">lambda_deploy:</span> <span class="p">{</span>
+        <span class="err">default:</span> <span class="err">{</span>
+            <span class="err">options:</span> <span class="err">{</span>
+                <span class="err">region:</span> <span class="err">&#39;us-east-1&#39;</span>
+            <span class="p">}</span><span class="err">,</span>
+            <span class="err">function:</span> <span class="err">&#39;cloudwatchtos</span><span class="mi">3</span><span class="err">&#39;</span>
+        <span class="err">}</span>
+    <span class="err">},</span>
+    <span class="err">lambda_package:</span> <span class="p">{</span>
+        <span class="err">default:</span> <span class="err">{</span>
+        <span class="p">}</span>
+    <span class="err">}</span>
+<span class="err">});</span>
+</pre></div>

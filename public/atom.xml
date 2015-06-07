@@ -4,14 +4,330 @@
   <title><![CDATA[The Source.sh]]></title>
   <link href="http://source.sh/atom.xml" rel="self"/>
   <link href="http://source.sh/"/>
-  <updated>2014-12-27T22:30:55+10:00</updated>
+  <updated>2015-06-07T13:31:37+10:00</updated>
   <id>http://source.sh/</id>
   <author>
-    <name><![CDATA[MichaelB]]></name>
+    <name><![CDATA[MichaelBkkk]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Automatically Exporting Cloudwatch Logs to S3 With Kinesis and Lambda]]></title>
+    <link href="http://source.sh/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/"/>
+    <updated>2015-06-06T23:48:55+10:00</updated>
+    <id>http://source.sh/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda</id>
+    <content type="html"><![CDATA[<p>Amazon <a href="http://aws.amazon.com/cloudwatch/">CloudWatch</a> is a great service for collecting logs and metrics from your AWS resources. Previously it has been challenging to export and analyze these logs. The announcement of <a href="http://aws.amazon.com/about-aws/whats-new/2015/06/amazon-cloudwatch-logs-subscriptions/">Kinesis subscriptions</a> for CloudWatch enables a whole new way to work with this service.</p>
+
+<p>This blog post will explain how you can leverage Lambda to create automated data pipelines for CloudWatch, with no dedicated compute resources. The focus will be on exporting logs to objects in S3, but the same concept can be used to enable any sort of custom processing within the constraints of Lambda.</p>
+
+<p>Exporting to S3 is a good place to start as this allows you to run Hive or other log processing software on the exported logs. The source we will as use an example is CloudTrail, however the same method applies to any CloudWatch log. Its worth noting that CloudTrail logs can already be automatically exported to S3 within the AWS console, it is simply used as a convenient source for the log group if you dont have any existing sources.</p>
+
+<h2>Before Starting</h2>
+
+<p>You will first need to set up a CloudWatch log group. <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cw_send_ct_events.html">Sending CloudTrail Events to CloudWatch Logs</a> explains the steps required if you want to use CloudTrail as the source.</p>
+
+<p>Once you have a log group setup follow the steps in <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html">Real-time Processing of Log Data with Subscriptions</a>. This documentation is quite new so I did come across a few gotchas:</p>
+
+<ul>
+<li>make sure your aws-cli is completely up to date, you will know its not if <code>aws logs put-subscription-filter</code> is not a valid command</li>
+<li>Configure your Kinesis stream within us-east-1, eu-west-1 or us-west-2, as your stream needs to be in the same region as your Lambda functions for the next steps</li>
+<li>if you are following all the steps in the guide its actually <code>base64 -d</code> not <code>base64 -D</code></li>
+</ul>
+
+
+<p>When you have finished setting up your stream it will be useful to copy for the output of <code>aws kinesis get-records</code> for testing your function later.</p>
+
+<h2>Create a Lambda Function</h2>
+
+<p>Ok so now you have a Kinesis stream subscribed to your log group. The next step is to build a Lambda function that will process the events fired by this stream. A great tool for creating lambda functions is <a href="https://github.com/Tim-B/grunt-aws-lambda">grunt-aws-lambda</a>.</p>
+
+<p>Start by creating a function with the hello world template.</p>
+
+<p><img src="http://source.sh/images/posts/cloudwatch_s3/lambda_cropped.png" alt="New Lambda Function" /></p>
+
+<p>For the role it is recommended to start with a new Kinesis Execution role, and then editing it to add S3FullAccess.</p>
+
+<p>Once this is created follow the instructions in grunt-aws-lambda to set up a new project.</p>
+
+<p>The key files you will need to configure are.</p>
+
+<figure class='code'><figcaption><span>index.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">AWS</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;aws-sdk&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">zlib</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;zlib&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">async</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;async&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">exports</span><span class="p">.</span><span class="nx">handler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">AWS</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">region</span><span class="o">:</span> <span class="s1">&#39;us-east-1&#39;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">bucket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AWS</span><span class="p">.</span><span class="nx">S3</span><span class="p">();</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>    <span class="nx">logs</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>    <span class="nx">async</span><span class="p">.</span><span class="nx">eachSeries</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">Records</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">iterator</span><span class="p">(</span><span class="nx">record</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">zlib</span><span class="p">.</span><span class="nx">gunzip</span><span class="p">(</span><span class="k">new</span> <span class="nx">Buffer</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">kinesis</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="s1">&#39;base64&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">logEvents</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">&#39;ascii&#39;</span><span class="p">)).</span><span class="nx">logEvents</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="nx">logEvents</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">log</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">logs</span> <span class="o">=</span> <span class="nx">logs</span> <span class="o">+</span> <span class="nx">log</span><span class="p">.</span><span class="nx">message</span> <span class="o">+</span> <span class="s2">&quot;\n&quot;</span>
+</span><span class='line'>                <span class="p">});</span>
+</span><span class='line'>            <span class="nx">callback</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">},</span> <span class="kd">function</span> <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</span><span class='line'>        <span class="nx">time_string</span> <span class="o">=</span> <span class="nx">now</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()</span> <span class="o">+</span>
+</span><span class='line'>          <span class="s1">&#39;-&#39;</span> <span class="o">+</span>
+</span><span class='line'>          <span class="nx">now</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span>
+</span><span class='line'>          <span class="nx">now</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span>
+</span><span class='line'>          <span class="nx">now</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span>
+</span><span class='line'>          <span class="nx">now</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span>
+</span><span class='line'>          <span class="nx">now</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">Bucket</span><span class="o">:</span> <span class="s1">&#39;your_bucket_name&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">Key</span><span class="o">:</span> <span class="s1">&#39;cloudtrail_&#39;</span> <span class="o">+</span> <span class="nx">time_string</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">Body</span><span class="o">:</span> <span class="nx">logs</span>
+</span><span class='line'>        <span class="p">};</span>
+</span><span class='line'>        <span class="nx">bucket</span><span class="p">.</span><span class="nx">putObject</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
+</span><span class='line'>                <span class="nx">context</span><span class="p">.</span><span class="nx">fail</span><span class="p">();</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="nx">context</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s1">&#39;complete&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remember to change your_bucket_name to your own S3 bucket.</p>
+
+<figure class='code'><figcaption><span>package.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'> <span class="p">{</span>
+</span><span class='line'>    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;cloudwatchtos3&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Processes Kinesis events from CloudWatch&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;private&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;async&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.0&quot;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nt">&quot;grunt&quot;</span><span class="p">:</span> <span class="s2">&quot;0.4.*&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;grunt-aws-lambda&quot;</span><span class="p">:</span> <span class="s2">&quot;0.3.0&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;aws-sdk&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.23&quot;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nt">&quot;async&quot;</span><span class="p">:</span> <span class="s2">&quot;1,2.0&quot;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;BSD&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>GruntFile.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">grunt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;grunt&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-aws-lambda&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">lambda_invoke</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">lambda_deploy</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">region</span><span class="o">:</span> <span class="s1">&#39;us-east-1&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="kd">function</span><span class="o">:</span> <span class="s1">&#39;cloudwatchtos3&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">lambda_package</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">default</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;deploy&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;lambda_package&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda_deploy&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remember to change the function name if you have picked a different name, likewise with the region.</p>
+
+<p>To test your function use the following, replacing base64_gzipped_content. A good source for the kinesis data is the output from <code>aws kinesis get-records</code> from when you set up the Kinesis stream.</p>
+
+<figure class='code'><figcaption><span>event.json</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;Records&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span class='line'>          <span class="p">{</span>
+</span><span class='line'>              <span class="nt">&quot;kinesis&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>                  <span class="nt">&quot;partitionKey&quot;</span><span class="p">:</span> <span class="s2">&quot;partitionKey-3&quot;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="nt">&quot;kinesisSchemaVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;base64_gzipped_content&quot;</span>
+</span><span class='line'>              <span class="p">},</span>
+</span><span class='line'>              <span class="nt">&quot;eventSource&quot;</span><span class="p">:</span> <span class="s2">&quot;aws:kinesis&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="nt">&quot;eventID&quot;</span><span class="p">:</span> <span class="s2">&quot;shardId-000000000000:49545115243490985018280067714973144582180062593244200961&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="nt">&quot;invokeIdentityArn&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:iam::059493405231:role/testLEBRole&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="nt">&quot;eventVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="nt">&quot;eventName&quot;</span><span class="p">:</span> <span class="s2">&quot;aws:kinesis:record&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="nt">&quot;eventSourceARN&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:kinesis:us-west-2:35667example:stream/examplestream&quot;</span><span class="p">,</span>
+</span><span class='line'>              <span class="nt">&quot;awsRegion&quot;</span><span class="p">:</span> <span class="s2">&quot;us-west-2&quot;</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">]</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can then test your function with <code>grunt lambda_invoke</code></p>
+
+<p>If all went well there should now be a logfile cloudtrail_timestamp in your s3 bucket.</p>
+
+<p>Once you are happy with the function you can <code>grunt deploy</code></p>
+
+<p>Now your function is deployed to Lambda and ready to be used</p>
+
+<h2>Add Kinesis Event Source</h2>
+
+<p>The final step is to add your Kinesis Stream as an event source for your lambda function.</p>
+
+<pre><code>aws lambda create-event-source-mapping \
+--region us-east-1 \
+--function-name cloudwatchtos3 \
+--event-source  "the_arn_of_your_kinesis_stream" \
+--batch-size 100 \
+--starting-position TRIM_HORIZON \
+</code></pre>
+
+<p>When you go to your Lambda function list you should see the following.</p>
+
+<p><img src="http://source.sh/images/posts/cloudwatch_s3/event_cropped.png" alt="Alt text" /></p>
+
+<p>Once the batch is ready the Details will change to <code>Batch Size: 100, Last result: OK</code>. You should also see the log files appearing in your S3 bucket. If there is a error you can check the logs, likely candidates are the wrong permissions. Additionally if you are getting timeouts you can up the timeout limit, I upped it to 10 seconds from 3.</p>
+
+<h2>Finishing Up and Next Steps</h2>
+
+<p>If you are just testing this process out don&rsquo;t forget to delete your Kinesis stream, log group and S3 Bucket afterwards.</p>
+
+<p>Now that your log data is in S3 analysis options become extremely flexible. You could import it into EMR or download the data for your own analysis.</p>
+
+<p>Of course with this concept you aren&rsquo;t limited to just exporting to S3. You could use a restrictive subscription for critical errors and trigger alerts within Lambda. Or you could upload logs as documents to CloudSearch. Logs are a <a href="https://martin.kleppmann.com/2015/05/27/logs-for-data-infrastructure.html">powerful construct</a> for data infrastructure and this concept enables you to build this infrastructure without managing your own computing resources.</p>
+
+<h2>Pricing</h2>
+
+<p>Pricing is hard to predict as it depends on volume and timing of log generation. Kinesis will be the biggest driver of costs, with the cost of a single shard and PUT requests coming to around $15 a month. The best way to test pricing is to run the resources for a couple of days with the log that you want to export. Once you are done you can simply delete the Kinesis stream to avoid any further costs. The cost of exporting CloudTrail for 2 days came to under $1 however CloudTrail has a fairly low volume.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Selling Enterprise Software]]></title>
@@ -137,7 +453,7 @@ rails s
 
 <p><img src="http://source.sh/images/posts/aa/aa_1.png" alt="Alt text" /></p>
 
-<p>Login with <a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;&#58;&#x61;&#100;&#109;&#105;&#110;&#64;&#x65;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#97;&#100;&#109;&#x69;&#110;&#x40;&#101;&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;&#x63;&#x6f;&#109;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+<p>Login with <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x61;&#100;&#x6d;&#105;&#110;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;">&#97;&#x64;&#109;&#x69;&#110;&#64;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
 
 <p><img src="http://source.sh/images/posts/aa/aa_2.png" alt="Alt text" /></p>
 
