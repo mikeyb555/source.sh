@@ -11,7 +11,7 @@ Amazon [CloudWatch](http://aws.amazon.com/cloudwatch/) is a great service for co
 
 This blog post will explain how you can leverage Lambda to create automated data pipelines for CloudWatch, with no dedicated compute resources. The focus will be on exporting logs to objects in S3, but the same concept can be used to enable any sort of custom processing within the constraints of Lambda.
 
-Exporting to S3 is a good place to start as this allows you to run Hive or other log processing software on the exported logs. The source we will as use an example is CloudTrail, however the same method applies to any CloudWatch log. Its worth noting that CloudTrail logs can already be automatically exported to S3 within the AWS console, it is simply used as a convenient source for the log group if you dont have any existing sources.
+Exporting to S3 is a good place to start as this allows you to run Hive or other log processing software on the exported logs. The source we will as use an example is CloudTrail, however the same method applies to any CloudWatch log. It's worth noting that CloudTrail logs can already be automatically exported to S3 within the AWS console, it is simply used as a convenient source for the log group if you dont have any existing sources.
 
 ##Before Starting
 
@@ -19,9 +19,9 @@ You will first need to set up a CloudWatch log group. [Sending CloudTrail Events
 
 Once you have a log group setup follow the steps in [Real-time Processing of Log Data with Subscriptions](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/Subscriptions.html). This documentation is quite new so I did come across a few gotchas:
 
-* make sure your aws-cli is completely up to date, you will know its not if <code>aws logs put-subscription-filter</code> is not a valid command
+* make sure your aws-cli is completely up to date, you will know it's not if <code>aws logs put-subscription-filter</code> is not a valid command
 * Configure your Kinesis stream within us-east-1, eu-west-1 or us-west-2, as your stream needs to be in the same region as your Lambda functions for the next steps
-* if you are following all the steps in the guide its actually <code>base64 -d</code> not <code>base64 -D</code>
+* if you are following all the steps in the guide it's actually <code>base64 -d</code> not <code>base64 -D</code>
 
 When you have finished setting up your stream it will be useful to copy for the output of ```aws kinesis get-records``` for testing your function later.
 
