@@ -224,7 +224,7 @@
 </span><span class='line'>
 </span><span class='line'>        <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="p">{</span>
 </span><span class='line'>            <span class="nx">Bucket</span><span class="o">:</span> <span class="s1">&#39;your_bucket_name&#39;</span><span class="p">,</span>
-</span><span class='line'>            <span class="nx">Key</span><span class="o">:</span> <span class="s1">&#39;cloudtrail_&#39;</span> <span class="o">+</span> <span class="nx">time_string</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">Key</span><span class="o">:</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">().</span><span class="nx">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;cloudtrail_&#39;</span> <span class="o">+</span> <span class="nx">time_string</span><span class="p">,</span>
 </span><span class='line'>            <span class="nx">Body</span><span class="o">:</span> <span class="nx">logs</span>
 </span><span class='line'>        <span class="p">};</span>
 </span><span class='line'>        <span class="nx">bucket</span><span class="p">.</span><span class="nx">putObject</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
