@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://source.sh/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/</loc>
+    <lastmod>2015-06-06T23:48:55+10:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>http://source.sh/blog/2014/12/27/selling-enterprise-software/</loc>
     <lastmod>2014-12-27T21:59:18+10:00</lastmod>
     <priority>0.8</priority>
@@ -17,44 +22,54 @@
   </url>
   <url>
     <loc>http://source.sh/categories/</loc>
-    <lastmod>2014-12-27T22:37:00+10:00</lastmod>
+    <lastmod>2015-06-07T13:35:43+10:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://source.sh/blog/archives/</loc>
-    <lastmod>2014-12-27T22:37:00+10:00</lastmod>
+    <lastmod>2015-06-07T13:35:43+10:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://source.sh/</loc>
-    <lastmod>2014-12-27T22:37:00+10:00</lastmod>
+    <lastmod>2015-06-07T13:35:43+10:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>http://source.sh/archives/</loc>
-    <lastmod>2014-12-27T22:37:00+10:00</lastmod>
+    <lastmod>2015-06-07T13:35:43+10:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://source.sh/super-awesome/</loc>
-    <lastmod>2014-12-27T22:37:00+10:00</lastmod>
+    <lastmod>2015-06-07T13:35:43+10:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://source.sh/blog/categories/</loc>
-    <lastmod>2014-12-27T22:37:00+10:00</lastmod>
+    <lastmod>2015-06-07T13:35:43+10:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>http://source.sh/posts/</loc>
-    <lastmod>2014-12-27T22:37:00+10:00</lastmod>
+    <lastmod>2015-06-07T13:35:43+10:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://source.sh/images/posts/cba/Edit Template   MailChimp.html</loc>
+    <lastmod>2014-12-28T15:38:50+10:00</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://source.sh/images/posts/cba/Edit Template   MailChimp_files/preview.html</loc>
+    <lastmod>2014-12-28T15:38:50+10:00</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>

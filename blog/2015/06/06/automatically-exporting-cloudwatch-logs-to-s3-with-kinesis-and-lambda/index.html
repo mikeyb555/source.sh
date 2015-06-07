@@ -10,15 +10,15 @@
 <meta charset="utf-8">
 <meta http-equiv="cleartype" content="on">
 
-<title>Source.sh - The Source.sh</title>
+<title>Automatically Exporting Cloudwatch Logs to S3 With Kinesis and Lambda - The Source.sh</title>
 <meta name="author" content="MichaelB">
 
 
 
 
-<meta name="description" content="The Source">
+<meta name="description" content="The Source.">
 
-<meta name="keywords" content="Jekyll theme themes responsive blog modern tech hacks ">
+<meta name="keywords" content=" ">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -32,15 +32,15 @@
 <!-- Open Graph -->
 <meta property="og:local" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:url" content="http://source.sh">
-<meta property="og:title" content="Source.sh">
-<meta property="og:description" content="The Source">
+<meta property="og:url" content="http://source.sh/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda">
+<meta property="og:title" content="Automatically Exporting Cloudwatch Logs to S3 with Kinesis and Lambda">
+<meta property="og:description" content="The Source.">
 
-  <meta property="og:image" content="/images/threaded-blue-on-black-cropped.jpg">
+  <meta property="og:image" content="">
 
 <meta property="og:site_name" content="The Source.sh">
 
-<link rel="canonical" href="http://source.sh">
+<link rel="canonical" href="http://source.sh/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda">
 <link href="/favicon.png" rel="icon">
 <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -58,9 +58,10 @@
 
 </head>
 
-<body id="post-index" class="feature">
-  <!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
-  <nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
 	<button class="dl-trigger">Open Menu</button>
 	<ul class="dl-menu">
 		<li><a href="/">Home</a></li>
@@ -91,56 +92,20 @@
 </nav><!-- /.dl-menuwrapper -->
 
 
-  <div class="entry-header">
-    
-    
-      <div class="entry-image">
-        <img src="/images/threaded-blue-on-black-cropped.jpg" alt="Source.sh">
-      </div><!-- /.entry-image -->
-    
-    <div class="header-title">
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
       <div class="header-title-wrap">
-        <h1>The Source.sh</h1>
-        <h2>The Source.</h2>
+        
+          <h1 class="entry-title"><a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/" rel="bookmark" title="Automatically Exporting Cloudwatch Logs to S3 with Kinesis and Lambda">Automatically Exporting Cloudwatch Logs to S3 with Kinesis and Lambda</a></h1>
+        
+        <h2>June 06, 2015</h2>
       </div><!-- /.header-title-wrap -->
-    </div><!-- /.header-title -->
-  </div><!-- /.entry-header -->
-
-  <div id="main" role="main">
-    
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2015-06-06T23:48:55+10:00">
-        <a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/">June 06, 2015</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About MichaelB">MichaelB</a>
-      </span>
-    </span>
-    
-      &nbsp; &bull; &nbsp;<span class="entry-comments">
-        <a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/#disqus_thread">Comment</a>
-      </span>
-    
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/" rel="bookmark" title="Automatically Exporting Cloudwatch Logs to S3 With Kinesis and Lambda" itemprop="url">Automatically Exporting Cloudwatch Logs to S3 With Kinesis and Lambda</a>
-    </h1>
-  
-</header>
-
-<div class="entry-content">
-  <p>Amazon <a href="http://aws.amazon.com/cloudwatch/">CloudWatch</a> is a great service for collecting logs and metrics from your AWS resources. Previously it has been challenging to export and analyze these logs. The announcement of <a href="http://aws.amazon.com/about-aws/whats-new/2015/06/amazon-cloudwatch-logs-subscriptions/">Kinesis subscriptions</a> for CloudWatch enables a whole new way to work with this service.</p>
+    </header>
+    <div class="entry-content">
+      <p>Amazon <a href="http://aws.amazon.com/cloudwatch/">CloudWatch</a> is a great service for collecting logs and metrics from your AWS resources. Previously it has been challenging to export and analyze these logs. The announcement of <a href="http://aws.amazon.com/about-aws/whats-new/2015/06/amazon-cloudwatch-logs-subscriptions/">Kinesis subscriptions</a> for CloudWatch enables a whole new way to work with this service.</p>
 
 <p>This blog post will explain how you can leverage Lambda to create automated data pipelines for CloudWatch, with no dedicated compute resources. The focus will be on exporting logs to objects in S3, but the same concept can be used to enable any sort of custom processing within the constraints of Lambda.</p>
 
@@ -449,185 +414,54 @@
 
 <p>Pricing is hard to predict as it depends on volume and timing of log generation. Kinesis will be the biggest driver of costs, with the cost of a single shard and PUT requests coming to around $15 a month. The best way to test pricing is to run the resources for a couple of days with the log that you want to export. Once you are done you can simply delete the Kinesis stream to avoid any further costs. The cost of exporting CloudTrail for 2 days came to under $1 however CloudTrail has a fairly low volume.</p>
 
-  
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2014-12-27T21:59:18+10:00">
-        <a href="/blog/2014/12/27/selling-enterprise-software/">December 27, 2014</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About MichaelB">MichaelB</a>
-      </span>
-    </span>
+      <footer class="entry-meta">
+        <span class="entry-tags"></span>
+        <span><a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/" rel="bookmark" title="Automatically Exporting Cloudwatch Logs to S3 with Kinesis and Lambda">Automatically Exporting Cloudwatch Logs to S3 with Kinesis and Lambda</a> was published on <span class="entry-date date published updated"><time datetime="2015-06-06T23:48:55+10:00">June 06, 2015</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="" title="About MichaelB">MichaelB</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
     
-      &nbsp; &bull; &nbsp;<span class="entry-comments">
-        <a href="/blog/2014/12/27/selling-enterprise-software/#disqus_thread">Comment</a>
-      </span>
+      <div class="read-more">
+        
+          <div class="read-more-header">
+            <a href="/blog/2014/12/27/selling-enterprise-software/" class="btn">Read More</a>
+          </div><!-- /.read-more-header -->
+          <div class="read-more-content">
+            <h3><a href="/blog/2014/12/27/selling-enterprise-software/" title="Selling Enterprise Software">Selling Enterprise Software</a></h3>
+            <p>Interesting read from Kalzumeus.All internal users hate the purchasing process because it inhibits their ability to get work done. &hellip;&hellip; <a href="/blog/2014/12/27/selling-enterprise-software/"> Continue reading</a></p>
+          </div><!-- /.read-more-content -->
+        
+        <div class="read-more-list">
+          
+            <div class="list-item">
+              <h4><a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/" title="Commbank: Your Australian Financial Operating System">Commbank: Your Australian Financial Operating System</a></h4>
+              <span>Published on December 22, 2014</span>
+            </div><!-- /.list-item -->
+          
+            <div class="list-item">
+              <h4><a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" title="Simple Reporting and CRUD with Active Admin">Simple Reporting and CRUD with Active Admin</a></h4>
+              <span>Published on December 21, 2014</span>
+            </div><!-- /.list-item -->
+          
+        </div><!-- /.read-more-list -->
+      </div><!-- /.read-more -->
     
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="https://training.kalzumeus.com/newsletters/archive/enterprise_sales" rel="bookmark" title="Selling Enterprise Software"><i class="fa fa-external-link"></i></a> 
-      <a href="/blog/2014/12/27/selling-enterprise-software/">Selling Enterprise Software</a>
-    </h1>
-  
-</header>
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  </article>
+</div><!-- /#main -->
 
-<div class="entry-content">
-  <p>Interesting read from Kalzumeus.</p>
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 MichaelB. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/Z1MM32M4N/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
 
-<blockquote><p>All internal users hate the purchasing process because it inhibits their ability to get work done. Successful Enterprise sales is about finding an internal champion who really wants your product like they want oxygen, and then allying with that person against their own employer. One of the easiest ways to do this is allowing them to exercise any loophole their Purchasing Department provides.</p><p>Because the whole rigamarole costs several hundred dollars in employee salary to approve any PO, most internal Purchasing Departments have a few enumerated exceptions. One is an upper limit on expenses a worker or low-level manager can approve on their own authority without ceremony, generally by putting them on a corporate credit card</p></blockquote>
+  </footer>
+</div><!-- /.footer-wrapper -->
 
 
-<p>As part of my job I am often looking at SaaS products. I like to do a bit of research here so I have a solid idea of how to use the platform, ie. become a better &lsquo;internal champion&rsquo; when selling the solution to management.</p>
-
-<p>I would extend the above concept in two ways</p>
-
-
-  
-  
-    <footer>
-      <a class="btn" rel="full-article" href="/blog/2014/12/27/selling-enterprise-software/">Read on &rarr;</a>
-    </footer>
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2014-12-22T13:40:04+10:00">
-        <a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/">December 22, 2014</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About MichaelB">MichaelB</a>
-      </span>
-    </span>
-    
-      &nbsp; &bull; &nbsp;<span class="entry-comments">
-        <a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/#disqus_thread">Comment</a>
-      </span>
-    
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/" rel="bookmark" title="Commbank: Your Australian Financial Operating System" itemprop="url">Commbank: Your Australian Financial Operating System</a>
-    </h1>
-  
-</header>
-
-<div class="entry-content">
-  <p>If you live in Australia, or are moving to Australia the best bank for the technically inclined is Commonwealth Bank (CBA). This can be a little counterintuive because CBA is not a &ldquo;challenger&rdquo; or competitive brand. Their various rates and charges tend to be on the high side relative to these challengers. However their combination of internet banking, smartphone applications, super and share trading platforms is unbeatable. Behind the scenes this is because CBA are the only bank to have successfully migrated their core systems to a modern platform.</p>
-
-
-  
-  
-    <footer>
-      <a class="btn" rel="full-article" href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/">Read on &rarr;</a>
-    </footer>
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2014-12-21T19:38:59+10:00">
-        <a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/">December 21, 2014</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About MichaelB">MichaelB</a>
-      </span>
-    </span>
-    
-      &nbsp; &bull; &nbsp;<span class="entry-comments">
-        <a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/#disqus_thread">Comment</a>
-      </span>
-    
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" rel="bookmark" title="Simple Reporting and CRUD With Active Admin" itemprop="url">Simple Reporting and CRUD With Active Admin</a>
-    </h1>
-  
-</header>
-
-<div class="entry-content">
-  <p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
-
-
-  
-  
-    <footer>
-      <a class="btn" rel="full-article" href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/">Read on &rarr;</a>
-    </footer>
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-
-<div class="pagination">
-  
-  <a href="/archives">Blog Archives</a>
-  
-</div><!-- /.pagination -->
-
-  </div><!-- /#main -->
-
-  <div class="footer-wrapper">
-    <footer role="contentinfo">
-      <span>&copy; 2015 MichaelB. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/Z1MM32M4N/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
-
-    </footer>
-  </div><!-- /.footer-wrapper -->
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	        
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/javascripts/octopress.js" type="text/javascript"></script>
 <script src="/javascripts/scripts.min.js"></script>
@@ -646,8 +480,25 @@
 
 
 
-          
-  
+
+<script type="text/javascript">
+      var disqus_shortname = 'sourcesh';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://source.sh/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/';
+        var disqus_url = 'http://source.sh/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+	        
 
 </body>
 </html>
