@@ -1,111 +1,100 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-
+<!DOCTYPE HTML>
+<html>
 <head>
+	<script data-cfasync="false" type="text/javascript" src="//use.typekit.net/axj3cfp.js"></script>
+	<script data-cfasync="false" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<meta charset="utf-8">
+	<title>Simple Reporting and CRUD with Active Admin  | The Source.sh</title>
 
+<meta name="author" content="MichaelB"> 
 
-<meta charset="utf-8">
-<meta http-equiv="cleartype" content="on">
+<meta name="description" content="The Source."> <meta name="keywords" content="">
 
-<title>Simple Reporting and CRUD With Active Admin - The Source.sh</title>
-<meta name="author" content="MichaelB">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+	<link href="/atom.xml" rel="alternate" title="The Source.sh" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js"></script>
 
+<script language="Javascript" type="text/javascript">
+$(document).ready(
+  function() {
+    (function($) {
+      $(".fancybox[data-content-id]").each(function() {
+        this.href = $(this).data('content-id');
+      });
+      $(".fancybox").fancybox({
+        beforeLoad: function() {
+          var el, 
+              id = $(this.element).data('title-id');
 
+          if (id) {
+            el = $('#' + id);
 
-<meta name="description" content="The Source.">
+            if (el.length) {
+              this.title = el.html();
+            }
+          }
+          if ($(this).data('content')) {
+            this.content = $(this).data('content');
+          }
+        },
+        helpers: {
+          title: {
+            type: 'inside'
+          }
+        }
+      });
+    })(jQuery);
+  }
+);
+</script>
 
-<meta name="keywords" content=" ">
-
-
-<!-- http://t.co/dKP3o1e -->
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- Twitter Cards -->
-
-
-<!-- Open Graph -->
-<meta property="og:local" content="en_US">
-<meta property="og:type" content="article">
-<meta property="og:url" content="http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin">
-<meta property="og:title" content="Simple Reporting and CRUD with Active Admin">
-<meta property="og:description" content="The Source.">
-
-  <meta property="og:image" content="">
-
-<meta property="og:site_name" content="The Source.sh">
-
-<link rel="canonical" href="http://source.sh/blog/2014/12/21/simple-reporting-and-crud-with-active-admin">
-<link href="/favicon.png" rel="icon">
-<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="/atom.xml" rel="alternate" title="The Source.sh" type="application/atom+xml">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-<script>Modernizr || document.write('<script src="/javascripts/vendor/modernizr-2.6.2.custom.min.js"><\/script>') </script>
-
-
-
-<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-
+	
 </head>
 
-<body id="post" >
-
-<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
-<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
-	<button class="dl-trigger">Open Menu</button>
-	<ul class="dl-menu">
-		<li><a href="/">Home</a></li>
-		<li>
-			<a href="#">About</a>
-			<ul class="dl-submenu">
-				<li>
-					<img src="" alt="MichaelB photo" class="author-photo">
-					<h4>MichaelB</h4>
-					<p></p>
-				</li>
-				
-				
-				
-				
-				
-			</ul><!-- /.dl-submenu -->
-		</li>
-		<li>
-			<a href="#">Posts</a>
-			<ul class="dl-submenu">
-				<li><a href="/posts/">All Posts</a></li>
-				<li><a href="/categories/">All Categories</a></li>
-			</ul>
-		</li>
-		
-	</ul><!-- /.dl-menu -->
-</nav><!-- /.dl-menuwrapper -->
 
 
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Source.sh</a></h1>
+<h4>The Source.</h4>
+<nav id="main-nav"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/hire-me">Hire Me</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/hire-me">Hire Me</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="https://www.google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:source.sh">
+			</form>
+		</div>
+	</div>
+</nav>
 
 
-<div id="main" role="main">
-  <article class="hentry">
-    <header class="header-title">
-      <div class="header-title-wrap">
-        
-          <h1 class="entry-title"><a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" rel="bookmark" title="Simple Reporting and CRUD with Active Admin">Simple Reporting and CRUD with Active Admin</a></h1>
-        
-        <h2>December 21, 2014</h2>
-      </div><!-- /.header-title-wrap -->
-    </header>
-    <div class="entry-content">
-      <p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
+</header>
+
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Simple Reporting and CRUD With Active Admin</h2>
+	<div class="entry-content"><p>Active Admin is the best way to build simple CRUD&rsquo;s to collect and report data. This makes it excellent for building internal applications and replacing the default internal application - Microsoft Excel.</p>
 
 <!-- more -->
 
@@ -142,7 +131,7 @@ rails s
 
 <p><img src="/images/posts/aa/aa_1.png" alt="Alt text" /></p>
 
-<p>Login with <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#97;&#x64;&#109;&#105;&#x6e;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#99;&#x6f;&#109;">&#97;&#100;&#x6d;&#x69;&#x6e;&#64;&#101;&#120;&#97;&#109;&#x70;&#108;&#x65;&#46;&#99;&#111;&#x6d;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
+<p>Login with <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#97;&#x64;&#109;&#105;&#x6e;&#x40;&#x65;&#x78;&#97;&#109;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#x6d;">&#97;&#100;&#109;&#x69;&#x6e;&#64;&#x65;&#x78;&#97;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#109;</a> and &lsquo;password&rsquo; and you will be taken to the admin dashboard.</p>
 
 <p><img src="/images/posts/aa/aa_2.png" alt="Alt text" /></p>
 
@@ -427,78 +416,65 @@ rails s
 <li>active admin has had breaking API changes in the past, so relying on older blog posts does not always work. If you dont need to run the latest version of rails the older rubygems packaged version tends to have more code samples</li>
 </ul>
 
-
-      <footer class="entry-meta">
-        <span class="entry-tags"></span>
-        <span><a href="/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" rel="bookmark" title="Simple Reporting and CRUD with Active Admin">Simple Reporting and CRUD with Active Admin</a> was published on <span class="entry-date date published updated"><time datetime="2014-12-21T19:38:59+10:00">December 21, 2014</time></span></span>
-        
-        <span class="author vcard"><span class="fn"><a href="" title="About MichaelB">MichaelB</a></span></span>
-        <div class="social-share">
-          <ul class="socialcount socialcount-small inline-list">
-            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" title="Share on Facebook"><span class="count"><i class="fa fa-facebook-square"></i> Like</span></a></li>
-            <li class="twitter"><a href="https://twitter.com/intent/tweet?text=/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" title="Share on Twitter"><span class="count"><i class="fa fa-twitter-square"></i> Tweet</span></a></li>
-            <li class="googleplus"><a href="https://plus.google.com/share?url=/blog/2014/12/21/simple-reporting-and-crud-with-active-admin/" title="Share on Google Plus"><span class="count"><i class="fa fa-google-plus-square"></i> +1</span></a></li>
-          </ul>
-        </div><!-- /.social-share -->
-      </footer>
-    </div><!-- /.entry-content -->
-    
-      <div class="read-more">
-        
-          <div class="read-more-header">
-            <a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/" class="btn">Read More</a>
-          </div><!-- /.read-more-header -->
-          <div class="read-more-content">
-            <h3><a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/" title="Automatically Exporting Cloudwatch Logs to S3 with Kinesis and Lambda">Automatically Exporting Cloudwatch Logs to S3 with Kinesis and Lambda</a></h3>
-            <p>Amazon [CloudWatch](http://aws.amazon.com/cloudwatch/) is a great service for collecting logs and metrics from your AWS resources. &hellip;&hellip; <a href="/blog/2015/06/06/automatically-exporting-cloudwatch-logs-to-s3-with-kinesis-and-lambda/"> Continue reading</a></p>
-          </div><!-- /.read-more-content -->
-        
-        <div class="read-more-list">
-          
-            <div class="list-item">
-              <h4><a href="/blog/2014/12/27/selling-enterprise-software/" title="Selling Enterprise Software">Selling Enterprise Software</a></h4>
-              <span>Published on December 27, 2014</span>
-            </div><!-- /.list-item -->
-          
-            <div class="list-item">
-              <h4><a href="/blog/2014/12/22/commbank-your-australian-financial-operating-system/" title="Commbank: Your Australian Financial Operating System">Commbank: Your Australian Financial Operating System</a></h4>
-              <span>Published on December 22, 2014</span>
-            </div><!-- /.list-item -->
-          
-        </div><!-- /.read-more-list -->
-      </div><!-- /.read-more -->
-    
-    <section id="disqus_thread"></section><!-- /#disqus_thread -->
-  </article>
-</div><!-- /#main -->
-
-<div class="footer-wrapper">
-  <footer role="contentinfo">
-    <span>&copy; 2015 MichaelB. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/Z1MM32M4N/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
-
-  </footer>
-</div><!-- /.footer-wrapper -->
+</div>
 
 
-	        
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="/javascripts/octopress.js" type="text/javascript"></script>
-<script src="/javascripts/scripts.min.js"></script>
-
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-57912646-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+<div class="meta">
+	<div class="date">
 
 
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-12-21T19:38:59+10:00" pubdate data-updated="true"></time></div>
+	
+
+
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+<!---	<a class="addthis_counter addthis_pill_style"></a> &#8212;>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2015
+
+    MichaelB
+
+<br>
+Powered by Octopress.
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
 
 
 <script type="text/javascript">
@@ -518,7 +494,21 @@ rails s
 </script>
 
 
-	        
+
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+ })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-57912646-1');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
 
 </body>
 </html>

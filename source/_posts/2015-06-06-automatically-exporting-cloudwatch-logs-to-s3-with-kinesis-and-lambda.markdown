@@ -9,6 +9,8 @@ categories:
 
 Amazon [CloudWatch](http://aws.amazon.com/cloudwatch/) is a great service for collecting logs and metrics from your AWS resources. Previously it has been challenging to export and analyze these logs. The announcement of [Kinesis subscriptions](http://aws.amazon.com/about-aws/whats-new/2015/06/amazon-cloudwatch-logs-subscriptions/) for CloudWatch enables a whole new way to work with this service.
 
+<!-- more -->
+
 This blog post will explain how you can leverage Lambda to create automated data pipelines for CloudWatch, with no dedicated compute resources. The focus will be on exporting logs to objects in S3, but the same concept can be used to enable any sort of custom processing within the constraints of Lambda.
 
 Exporting to S3 is a good place to start as this allows you to run Hive or other log processing software on the exported logs. The source we will as use an example is CloudTrail, however the same method applies to any CloudWatch log. It's worth noting that CloudTrail logs can already be automatically exported to S3 within the AWS console, it is simply used as a convenient source for the log group if you dont have any existing sources.
